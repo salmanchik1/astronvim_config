@@ -1,4 +1,21 @@
 -- set vim options here (vim.<first_key>.<second_key> = value)
+
+-- Enable line numbers (absolute line numbers) for all modes
+vim.wo.number = true
+
+-- Disable relative line numbers in insert and replace modes
+vim.cmd([[
+  augroup DisableRelativeNumber
+    autocmd!
+    autocmd InsertEnter * set norelativenumber
+    autocmd InsertLeave * set relativenumber
+  augroup END
+]])
+
+-- Toggle relative line numbers in normal and visual modes
+vim.api.nvim_set_keymap('n', '<leader>rn', ':set relativenumber!<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<leader>rn', ':set relativenumber!<CR>', { noremap = true, silent = true })
+
 return {
   opt = {
     -- set to true or false etc.
