@@ -22,8 +22,20 @@ return {
 
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
-    virtual_text = true,
+    virtual_text = false,
     underline = true,
+    signs = true,
+    float = {
+      border = "single",
+      format = function(diagnostic)
+        return string.format(
+          "%s (%s) [%s]",
+          diagnostic.message,
+          diagnostic.source,
+          diagnostic.code or diagnostic.user_data.lsp.code
+        )
+      end,
+    },
   },
 
   lsp = {
@@ -50,7 +62,7 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = {
-      -- "pyright"
+       "pyright"
     },
   },
 
